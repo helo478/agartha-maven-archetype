@@ -1,0 +1,32 @@
+#!groovy
+
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                sh '''
+                    echo 'Building..."
+                    mvn compile
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                sh '''
+                    echo "testing..."
+                    mvn test
+                '''
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh '''
+                    echo "Deploying..."
+                    mvn package
+                '''
+            }
+        }
+    }
+}
